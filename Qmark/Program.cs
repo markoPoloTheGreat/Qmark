@@ -23,6 +23,8 @@ public class Program
         q2.Insert(19);
         Console.WriteLine("old"+q2);
         Console.WriteLine("new"+InsertInOrder(q2, 4));
+        Console.WriteLine("new" + InsertInOrder(q2, 20));
+        Console.WriteLine("new" + InsertInOrder(q2, -1));
 
     }
     public static bool CheckNum(Queue<int> q,int num)

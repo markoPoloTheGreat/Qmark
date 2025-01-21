@@ -1,6 +1,6 @@
 ﻿namespace Qmark;
 public class Program
-
+    //mark 21/1
 {
     public static void Main(string[] args)
     {
@@ -27,16 +27,17 @@ public class Program
         Console.WriteLine("new" + InsertInOrder(q2, -1));
 
     }
-    public static bool CheckNum(Queue<int> q,int num)
+
+    public static bool CheckNum(Queue<int> q, int num)
     {
         Queue<int> qCopy = SetQCopy(q);
-        
+
         Console.WriteLine(qCopy);
         int currCheck;
-        while(!qCopy.IsEmpty())
+        while (!qCopy.IsEmpty())
         {
             currCheck = qCopy.Remove();
-            if(currCheck == num) 
+            if (currCheck == num)
             {
                 Console.WriteLine(q);
                 return true;
@@ -47,35 +48,37 @@ public class Program
 
 
     }
-    public static bool CheckNeighbors(Queue<int> q,int index)
+    public static bool CheckNeighbors(Queue<int> q, int index)
     {
-        
-            //Receives a queue with numbers and a number of index 
-            //Returns if the number is perfect
-            Queue<int> qCopy = SetQCopy(q);
-            int left = 0, right, target;
-            if(index == 1)
-            {
-                return false;
-            }
-            for(int i = 0; i < index-1; i++)
-            {
-               left= qCopy.Remove();
-            }
-            target = qCopy.Remove();
-            if (qCopy.IsEmpty())
-            {
-                return false;
-            }
-            right= qCopy.Remove();
-            if (right + left == target)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+
+        //Receives a queue with numbers and a number of index 
+        //Returns if the number is perfect
+        Queue<int> qCopy = SetQCopy(q);
+        int left = 0, right, target;
+        //check edge case
+        if (index == 1)
+        {
+            return false;
+        }
+        for (int i = 0; i < index - 1; i++)
+        {
+            left = qCopy.Remove();
+        }
+        target = qCopy.Remove();
+        //check if last
+        if (qCopy.IsEmpty())
+        {
+            return false;
+        }
+        right = qCopy.Remove();
+        if (right + left == target)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
 
     }
@@ -90,30 +93,34 @@ public class Program
         while (!qCopy.IsEmpty())
         {
             qCopy.Remove();
+            //check if last
             if (qCopy.IsEmpty())
             {
                 return isPerfect;
             }
             //Using the function to check if the number is perfect
-            isPerfect = isPerfect&&CheckNeighbors(q, i);
+            isPerfect = isPerfect && CheckNeighbors(q, i);
             i++;
         }
         return isPerfect;
     }
-    public static Queue<int> InsertInOrder(Queue<int> q,int num)
+    public static Queue<int> InsertInOrder(Queue<int> q, int num)
     {
-        Queue<int> qresult = new Queue<int>();
-        int curr= q.Remove();
+        Queue<int> qresult = new();
+        int curr = q.Remove();
+        //insert item less then  num
         while (curr < num)
         {
             qresult.Insert(curr);
             curr = q.Remove();
         }
         qresult.Insert(num);
+        //insert bigger then num
         while (!q.IsEmpty())
         {
             qresult.Insert(q.Remove());
         }
+        //insert back to q
         while (!qresult.IsEmpty())
         {
             q.Insert(qresult.Remove());

@@ -1,4 +1,6 @@
-﻿namespace Qmark;
+﻿using System;
+
+namespace Qmark;
 public class Program
     //mark 21/1
 {
@@ -115,6 +117,31 @@ public class Program
             curr = q.Remove();
         }
         qresult.Insert(num);
+        qresult.Insert(curr);
+        //insert bigger then num
+        while (!q.IsEmpty())
+        {
+            qresult.Insert(q.Remove());
+        }
+        //insert back to q
+        while (!qresult.IsEmpty())
+        {
+            q.Insert(qresult.Remove());
+        }
+        return q;
+    }
+    public static Queue<Student> InsertStudentInOrder(Queue<Student> q, Student newS)
+    {
+        Queue<Student> qresult = new();
+        int newG=newS.GetGrade();
+        Student currS = q.Remove();
+        //insert item less then  num
+        while (currS.GetGrade() < newG)
+        {
+            qresult.Insert(currS);
+            currS = q.Remove();
+        }
+        qresult.Insert(newS);
         //insert bigger then num
         while (!q.IsEmpty())
         {

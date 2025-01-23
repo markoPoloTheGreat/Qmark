@@ -19,5 +19,10 @@ namespace Qmark
         {
             return grade;
         }
+        public override string ToString()
+        {
+            string str2return=name + " " + grade;
+            return str2return;
+        }
     }
 }
